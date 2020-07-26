@@ -24,7 +24,9 @@ class Product {
   @Column()
   quantity: number;
 
-  @OneToMany(() => OrdersProducts, ordersProducts => ordersProducts.product)
+  @OneToMany(() => OrdersProducts, ordersProducts => ordersProducts.order, {
+    eager: true,
+  })
   order_products: OrdersProducts[];
 
   @CreateDateColumn()
