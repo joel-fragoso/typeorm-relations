@@ -27,6 +27,7 @@ class Product {
   @OneToMany(() => OrdersProducts, ordersProducts => ordersProducts.order, {
     eager: true,
   })
+  @JoinTable()
   order_products: OrdersProducts[];
 
   @CreateDateColumn()

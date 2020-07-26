@@ -19,14 +19,14 @@ class OrdersProducts {
   @Column()
   order_id: string;
 
-  @ManyToOne(() => Order, order => order, { eager: true })
+  @ManyToOne(() => Order, order => order)
   @JoinColumn({ name: 'order_id' })
   order: Order;
 
   @Column()
   product_id: string;
 
-  @ManyToOne(() => Product, product => product, { eager: true })
+  @ManyToOne(() => Product, product => product)
   @JoinColumn({ name: 'product_id' })
   product: Product;
 
