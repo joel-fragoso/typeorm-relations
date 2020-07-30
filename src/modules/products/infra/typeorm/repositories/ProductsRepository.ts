@@ -41,8 +41,10 @@ class ProductsRepository implements IProductsRepository {
   }
 
   public async findAllById(products: IFindProducts[]): Promise<Product[]> {
+    const productsId = products.map(product => product.id);
+
     const findAllProductsById = await this.ormRepository.find({
-      where: { id: In(products) },
+      where: { id: In(productsId) },
     });
 
     return findAllProductsById;
@@ -51,7 +53,22 @@ class ProductsRepository implements IProductsRepository {
   public async updateQuantity(
     products: IUpdateProductsQuantityDTO[],
   ): Promise<Product[]> {
-    // TODO
+    const productsId = products.map(product => product.id);
+
+    const findProducts = await this.ormRepository.find({
+      where: { id: In(productsId) },
+    });
+
+    const productsData = findProducts.map((product, index) => {
+      return {
+        ...product,
+        quantity: product.quantity - products[index].quantity,
+      };
+    });
+
+    const updateProducts = await this.ormRepository.save(productsData);
+
+    return updateProducts;
   }
 }
 

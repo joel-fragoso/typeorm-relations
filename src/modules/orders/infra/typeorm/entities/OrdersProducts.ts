@@ -16,17 +16,17 @@ class OrdersProducts {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column('uuid')
   order_id: string;
 
-  @ManyToOne(() => Order, order => order)
+  @ManyToOne(() => Order)
   @JoinColumn({ name: 'order_id' })
   order: Order;
 
-  @Column()
+  @Column('uuid')
   product_id: string;
 
-  @ManyToOne(() => Product, product => product)
+  @ManyToOne(() => Product)
   @JoinColumn({ name: 'product_id' })
   product: Product;
 
